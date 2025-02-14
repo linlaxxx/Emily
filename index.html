@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te quiero mucho, Emily</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, white, pink);
+        }
+        #gif {
+            width: 300px;
+            height: 300px;
+        }
+        #yesButton, #noButton, #loveButton {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        #yesButton:hover, #noButton:hover, #loveButton {
+    filter: brightness(1.2);
+}
+        #yesButton {
+            background-color: rgba(0, 128, 0, 0.7); /* Verde opaco */
+            color: white;
+        }
+        #noButton {
+            background-color: rgba(255, 0, 0, 0.7); /* Rojo opaco */
+            color: white;
+        }
+        #loveButton {
+            background-color: #ff69b4; /* Un rosa que combina con el fondo */
+            color: white;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+        .grid img {
+            width: 500px;
+            height: 300px;
+        }
+        #finalContainer {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #finalTitle {
+            display: none;
+        }
+        #message{
+            margin-top: 20px;
+        }
+        #finalGif {
+            display: none;
+            width: 600px;
+            height: 500px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #loveSection {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">¿Quisieras ser mi San Valentín?</h1>
+    <img id="gif" src="amor.gif" alt="GIF">
+    <br><br>
+    <button id="yesButton" onclick="yesClicked()">Sí</button>
+    <button id="noButton" onclick="noClicked()">No</button>
+
+    <h2 id="subtitle" style="display: none;">Te quiero mucho, niña. <br> Sigamos creando recuerdos lindos juntos <3</h2>
+    <div class="grid" id="grid" style="display: none;">
+        <img src="1.jpg" alt="Foto 1">
+        <img src="2.jpg" alt="Foto 2">
+        <img src="3.jpg" alt="Foto 3">
+        <img src="4.jpg" alt="Foto 4">
+        <img src="5.jpg" alt="Foto 5">
+        <img src="6.jpg" alt="Foto 6">
+        <img src="7.jpg" alt="Foto 7">
+        <img src="8.jpg" alt="Foto 8">
+        <img src="9.jpg" alt="Foto 9">
+    </div>
+    <div id="loveSection">
+        <h2 id="loveTitle">Ahora tú dime que me quieres</h2>
+        <button id="loveButton" onclick="loveClicked()">Te quiero <3</button>
+    </div>
+
+    <div id="finalContainer">
+        <h1 id="finalTitle">Mi breve inmensidad azul</h1>
+        <img id="finalGif" src="viaje.gif" alt="GIF">
+        <h2 id="message">Celebra que estás viva, pequeña luciérnaga encendida. <br>
+        Pues eres tú, tú mi breve inmensidad azul, mi faro, mi luna encendida <br>
+    A pesar de que soy sólo un pecador buscando la paz <br>
+sé que en tu pecho descansa la primavera <br>
+y que vale más la rosa que el diamante <br>
+He aprendido que todo es pasajero, excepto el amor <br>
+Y aunque a veces nos veámos como simples mariposas en el huracán <br>
+Recuerda que en nuestro pequeño mundo podemos hacer crecer a las flores en el concreto. <br>
+Y aunque saltemos sin red, no tengas miedo a caer que yo te preso mis alas, niña. <br>
+Eres valiosa, eres importante, Emily, nunca lo olvides. <br>
+Por cierto, recuerda: "We are gonna be alright".</h2>
+    </div>
+
+    <script>
+        const gifs = ["desesperado2.gif", "porfa.gif", "enojado.gif", "enojado2.gif"];
+        const noTexts = ["¿Estás seguro?", "Por favor", "Ándale, Emilyyyy", "Que te den"];
+        let currentIndex = 0;
+        const finalGifs = ["amor.gif", "abrazonormal.gif", "abrazo.gif"];
+        let gifInterval;
+
+        function yesClicked() {
+            document.getElementById("title").innerText = "Gracias, niña <3";
+            document.getElementById("gif").src = finalGifs[0];
+            document.getElementById("yesButton").style.display = "none";
+            document.getElementById("noButton").style.display = "none";
+            document.getElementById("subtitle").style.display = "block";
+            document.getElementById("grid").style.display = "grid";
+            document.getElementById("loveSection").style.display = "block";
+
+            let gifIndex = 0;
+            gifInterval = setInterval(() => {
+                gifIndex = (gifIndex + 1) % finalGifs.length;
+                document.getElementById("gif").src = finalGifs[gifIndex];
+            }, 2000);
+        }
+
+        function noClicked() {
+            document.getElementById("gif").src = gifs[currentIndex];
+            document.getElementById("noButton").innerText = noTexts[currentIndex];
+            const yesButton = document.getElementById("yesButton");
+            yesButton.style.fontSize = (parseInt(window.getComputedStyle(yesButton).fontSize) + 20) + "px";
+            currentIndex = (currentIndex + 1) % gifs.length;
+        }
+
+        function loveClicked() {
+            document.getElementById("title").style.display = "none";
+            document.getElementById("gif").style.display = "none";
+            document.getElementById("subtitle").style.display = "none";
+            document.getElementById("grid").style.display = "none";
+            document.getElementById("loveSection").style.display = "none";
+            document.getElementById("finalContainer").style.display = "block";
+            document.getElementById("finalTitle").style.display = "block";
+            document.getElementById("finalGif").style.display = "block";
+        }
+    </script>
+</body>
+</html>
